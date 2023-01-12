@@ -29,7 +29,7 @@
 					<tr th:each="complete:${completeList}">
 						<td th:text="${complete.description}"></td>
 						<td>
-						 	<a  class="btn btn-danger">Delete</a>
+						 	<a th:href="@{deleteCompletedTodo(todoId=${complete.getId()})}" class="btn btn-danger">Delete</a>
 						</td>
 					</tr>
 				</tbody>
