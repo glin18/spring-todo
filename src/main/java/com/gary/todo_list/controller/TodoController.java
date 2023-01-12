@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gary.todo_list.entity.CompletedTodo;
 import com.gary.todo_list.entity.Todo;
+import com.gary.todo_list.repository.CompletedTodoRepository;
 import com.gary.todo_list.repository.TodoRepository;
 
 @Controller
@@ -21,6 +23,9 @@ public class TodoController {
 	
 	@Autowired
 	TodoRepository todoRepository;
+	
+	@Autowired
+	CompletedTodoRepository completedTodoRepository;
 	
 	@GetMapping({"/list", "/"})
 	public ModelAndView showList() {
@@ -65,6 +70,14 @@ public class TodoController {
 		Todo deleteTodo = todoRepository.findById(todoId).get();
 		todoRepository.delete(deleteTodo);
 		response.sendRedirect("/list");
+	}
+	
+	@GetMapping("/completedList")
+	public ModelAndView showCompletedList() {
+		List<CompletedTodo> completeList = completedTodoRepository.findAll();
+		ModelAndView mav = new ModelAndView("completed_todo_list");
+		mav.addObject(completeList);
+		return mav;
 	}
 	
 }
