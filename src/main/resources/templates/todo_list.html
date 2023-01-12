@@ -21,7 +21,7 @@
 						<td>
 							<a th:href="@{/editTodoForm(todoId=${todo.getId()})}" class="btn btn-info">Edit</a>
 							<a th:href="@{/completeTodo}" class="btn btn-success">Complete</a>
-						 	<a th:href="@{/deleteTodo}" class="btn btn-danger">Delete</a>
+						 	<a th:href="@{/deleteTodo(todoId=${todo.getId()})}" class="btn btn-danger">Delete</a>
 						</td>
 					</tr>
 				</tbody>

@@ -60,4 +60,11 @@ public class TodoController {
 		response.sendRedirect("/list");
 	}
 	
+	@GetMapping("/deleteTodo")
+	public void deleteTodo(@RequestParam Long todoId, HttpServletResponse response) throws IOException {
+		Todo deleteTodo = todoRepository.findById(todoId).get();
+		todoRepository.delete(deleteTodo);
+		response.sendRedirect("/list");
+	}
+	
 }
