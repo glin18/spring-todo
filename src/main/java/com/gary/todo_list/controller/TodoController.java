@@ -76,8 +76,18 @@ public class TodoController {
 	public ModelAndView showCompletedList() {
 		List<CompletedTodo> completeList = completedTodoRepository.findAll();
 		ModelAndView mav = new ModelAndView("completed_todo_list");
-		mav.addObject(completeList);
+		mav.addObject("completeList", completeList);
 		return mav;
+	}
+	
+	@GetMapping("/completeTodo")
+	public void completeTodo(@RequestParam Long todoId, HttpServletResponse response) throws IOException {
+		Todo oldTodo = todoRepository.findById(todoId).get();
+		CompletedTodo completedTodo = new CompletedTodo();
+		completedTodo.setDescription(oldTodo.getDescription());
+		completedTodoRepository.save(completedTodo);
+		todoRepository.delete(oldTodo);
+		response.sendRedirect("/list");
 	}
 	
 }
