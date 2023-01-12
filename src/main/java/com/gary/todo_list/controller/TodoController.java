@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gary.todo_list.entity.Todo;
@@ -41,6 +42,14 @@ public class TodoController {
 	public void addTodo(@ModelAttribute Todo todo, HttpServletResponse response) throws IOException {
 		todoRepository.save(todo);
 		response.sendRedirect("/list");
+	}
+	
+	@GetMapping("/editTodoForm")
+	public ModelAndView editTodoForm(@RequestParam Long todoId) {
+		ModelAndView mav = new ModelAndView("edit_todo_form");
+		Todo todo = todoRepository.findById(todoId).get();
+		mav.addObject("todo", todo);
+		return mav;
 	}
 	
 }

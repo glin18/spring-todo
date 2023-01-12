@@ -19,7 +19,7 @@
 					<tr th:each="todo:${todolist}">
 						<td th:text="${todo.description}"></td>
 						<td>
-							<a th:href="@{/editTodoForm}" class="btn btn-info">Edit</a>
+							<a th:href="@{/editTodoForm(todoId=${todo.getId()})}" class="btn btn-info">Edit</a>
 							<a th:href="@{/completeTodo}" class="btn btn-success">Complete</a>
 						 	<a th:href="@{/deleteTodo}" class="btn btn-danger">Delete</a>
 						</td>
