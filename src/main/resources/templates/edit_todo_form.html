@@ -9,6 +9,7 @@
 			<hr>
 			<form th:action="@{/editTodo}" th:object="${todo}" method="POST">
 				<input type="text" th:field="*{description}" placeholder="Enter Todo" value="*{description}" class="form-control col-4 mb-4" required>
+				<input type="hidden" th:field="*{id}" value="*{id}">
 				<button class="btn btn-primary" type="submit">Edit</button>
 			</form>
 			<hr>

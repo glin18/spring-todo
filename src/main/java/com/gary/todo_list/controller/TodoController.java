@@ -52,4 +52,12 @@ public class TodoController {
 		return mav;
 	}
 	
+	@PostMapping("/editTodo")
+	public void editTodo(@ModelAttribute Todo updatedTodo, HttpServletResponse response) throws IOException {
+		Todo oldTodo = todoRepository.findById(updatedTodo.getId()).get();
+		oldTodo.setDescription(updatedTodo.getDescription());
+		todoRepository.save(oldTodo);
+		response.sendRedirect("/list");
+	}
+	
 }
